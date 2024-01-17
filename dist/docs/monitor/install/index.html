@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InLog - Simple and efficient server monitoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 18px;
+        }
+
+        li > p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <div class="container">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="/"><img src="https://www.inapplet.com/assets/img/logo-color.svg" alt="" height="28" class="me-1" alt="InApplet"> InLog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+                <li class="nav-item px-3">
+                    <a class="nav-link fw-bold" href="#">Monitor</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link fw-bold" href="#">Alerts</a>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link fw-bold" href="#">RUM</a>
+                </li>
+            </ul> -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item">
+                    <a class="nav-link fw-bold" href="#">Blog</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="/docs/">Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="#">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+    <div class="card-body">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <b>Monitor</b>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/docs/monitor/install/">- Install</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/docs/monitor/disk-metrics/">- Disk I/O Metrics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/docs/monitor/netwoek-metrics/">- Network I/O Metrics</a>
+            </li>
+        </ul>
+    </div>
+</div>
+                </div>
+                <div class="col-9">
+                    <h1>Install the Monitor Client</h1>
+<p>The <strong>Monitoring Client</strong> is designed to be lightweight, easy to install, and configure.</p>
+<p>With approximately 8 MB for download, when executed, it takes up no more than 10 MB of RAM on the host machine.</p>
+<p>To get started, log in to access your account.</p>
+<p>The installation instructions will appear on your screen upon entering the dashboard. If you already have a monitor and want to add another one, click on the <strong>Configure</strong> tab to review the instructions.</p>
+<p>Follow the steps displayed on the screen to install the Client.</p>
+<h2>Configuration</h2>
+<ul>
+<li><strong>user_uuid</strong> (mandatory)
+<ul>
+<li>This field is required to identify your account in the Client.</li>
+<li>It must be configured before running the <strong>run</strong> or <strong>service</strong> commands.</li>
+</ul>
+</li>
+<li><strong>machine_uuid</strong> (optional, generated automatically if not set manually)
+<ul>
+<li>You can specify a machine_uuid if you have installed it previously and want to maintain the same reference.</li>
+</ul>
+</li>
+<li><strong>instance_name</strong> (optional)
+<ul>
+<li>Gives an alias to the instance. This alias is used to identify the machine on the dashboard.</li>
+</ul>
+</li>
+<li><strong>disk_name</strong> (optional)
+<ul>
+<li>The default value is <strong>sda</strong>.</li>
+<li>Use the <code>lsblk</code> command to check the <strong>&quot;NAME&quot;</strong> of the disk you want to monitor.</li>
+<li>Only one disk can be monitored per instance.</li>
+</ul>
+</li>
+<li><strong>disk_path</strong> (optional)
+<ul>
+<li>The default value is <strong>/</strong>.</li>
+<li>Use the <code>lsblk</code> command to check the <strong>&quot;MOUNTPOINTS&quot;</strong> of the disk you want to monitor.</li>
+<li>Only one disk can be monitored per instance.</li>
+</ul>
+</li>
+<li><strong>loop_time</strong> (optional)
+<ul>
+<li>The default value is 60. The value is in seconds.</li>
+<li>Determine the period between data logs.</li>
+<li>It is not recommended to set a value less than 10, as it may cause issues with the accuracy of the collected data.</li>
+</ul>
+</li>
+</ul>
+<h2>Running</h2>
+<p>Use the <strong>run</strong> command to validate the installation.</p>
+<p>If no errors are presented, the sending of logs to the server will commence.</p>
+<p>To keep the Client running in the background, use the <strong>service</strong> command.</p>
+<p>The <strong>service</strong> command will create a <code>systemctl</code> process responsible for keeping the Client running.</p>
+<p>After executing the <strong>service</strong> command, you can check the execution of the Client in the background by using the <code>systemctl status inlog</code> command. The task status will be displayed. In case of an error, check the installation and configuration of the Client.</p>
+
+                </div>
+            </div>
+        </div>
+    
+
+    <div class="container">
+    <div class="row">
+        <div class="col border-top text-center">
+            <p class="py-3">InApplet 2013 - <a href="https://www.inapplet.com" target="_blank">www.inapplet.com</a></p>
+        </div>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
