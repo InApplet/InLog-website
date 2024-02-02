@@ -3,14 +3,23 @@ layout: layouts/layout.njk
 ---
 
 <div class="container py-5">
-    <div class="row d-flex align-items-center">
-        <div class="col-6">
+    <div class="row d-flex flex-column-reverse flex-lg-row align-items-center">
+        <div class="col-12 col-lg-6">
             <h1 class="h1 fw-bold">Simple and Accurate Server Monitoring</h1>
             <p>We've made monitoring the status of your servers easier than ever, providing a straightforward experience from the start, along with intelligent notifications.</p>
-            <a href="#" class="btn btn-primary fw-bold btn-lg">Get Started</a>
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <form action="/thanks" method="get" id="form-list">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="E-mail" name="email" id="input-list-email" aria-label="E-mail" required>
+                            <input type="submit" class="btn btn-primary fw-bold" type="button" id="button-addon2" value="Get Started">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <img class="img-fluid"
+        <div class="col-12 col-lg-6">
+            <img class="img-fluid mb-3 mb-lg-0"
                 src="/public/images/hero.jpg"
                 alt="Server Monitoring">
         </div>
@@ -25,7 +34,7 @@ layout: layouts/layout.njk
         </div>        
     </div>
     <div class="row align-items-stretch">
-        <div class="col-4">
+        <div class="col-12 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
@@ -41,7 +50,7 @@ layout: layouts/layout.njk
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -52,7 +61,7 @@ layout: layouts/layout.njk
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
@@ -66,3 +75,26 @@ layout: layouts/layout.njk
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('form-list').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = document.getElementById('input-list-email').value;
+
+        if (email == "") {
+            return false;
+        }
+        
+        document.getElementById('input-list-email').value = ""
+
+        var url = 'https://api.telegram.org/bot6316859141:AAEjY-x-XR03PC9NFlQRmBTz860doktbOh0/sendMessage?chat_id=973974621&text=New Email: ' + email;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Thank you! We will contact you via email shortly.');
+            });
+    });
+</script>
